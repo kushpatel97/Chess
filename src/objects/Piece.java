@@ -1,11 +1,12 @@
 package objects;
 
-public class Piece {
+public abstract class Piece {
 	// Location
 	int x;
 	int y;
-	boolean moved = false; // true - moved at least once | false - moved 0 times, for Pawns + Castle
+	boolean firstmove = false; // true - moved at least once | false - moved 0 times, for Pawns + Castle
 	boolean team; // true - white    false - black
+	boolean alive = true; // true - piece still alive    false - piece killed
 	
 	// White or Black
 	public void setTeam(boolean team) {
@@ -16,18 +17,14 @@ public class Piece {
 		return team;
 	}
 	
-	
-	// Set Location
-	public void put(int x, int y) {
-		this.x = x;
-		this.y = y;
-		moved = true;
+	// Alive or Dead
+	public void kill() {
+		this.alive = false;
 	}
 	
-	// Constructor
-	public Piece(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
+	// Move Piece
+	public abstract void move(int x, int y);
+	
+	// 
 	
 }

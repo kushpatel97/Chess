@@ -6,8 +6,9 @@ import board.*;
 public class Chess {
 	public static void main (String args[]) {
 		Board.welcome();
-		Piece[][] b = Board.buildBoard();	
 		
+		Piece[][] b = Board.buildBoard();	
+		Board.printBoard(b);
 		
 	}
 

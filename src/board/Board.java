@@ -1,6 +1,6 @@
 package board;
 
-import objects.Piece;
+import objects.*;
 
 public class Board {
 	
@@ -20,40 +20,41 @@ public class Board {
 		// Set Null
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				board[x][y] = null;
+				board[x][y] = new Pawn(x, y, true);
 			}
 		}
-
+		
+		return board;
+	}
+	
+	public static void printBoard(Piece[][] board) {
 		// PRINT BOARD
-		int n = 1;
+		int n = 8;
 		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				
+				System.out.print("-" + y + "-");
+				
+				// BORDER: LEFT (Numbers)
+				if (y == 7) {
+					System.out.print(" " + n);
+					n--;
+				}
+				// BORDER: LEFT (Numbers)
+			}
+			System.out.println();
 			
 			// BORDER: TOP (Letters)
-			if (x == 0) {
-				System.out.print("   ");
-				char l = 'A';
+			if (x == 7) {
+				char l = 'a';
 				for (int bord = 0; bord < 8; bord++) {
-					System.out.print("*" + l + "*");
+					System.out.print(" " + l + " ");
 					l = (char) (l + 1);
 				}
 				System.out.println();
 			}
 			// BORDER: TOP (Letters)
-			
-			for (int y = 0; y < 8; y++) {
-				// BORDER: LEFT (Numbers)
-				if (y == 0) {
-					System.out.print("*" + n + "*");
-					n++;
-				}
-				// BORDER: LEFT (Numbers)
-				
-				System.out.print("-" + y + "-");
-			}
-			System.out.println();
 		}
-		
-		return board;
 	}
 	
 	public boolean isEmpty(Piece[][] board, int x, int y) {
