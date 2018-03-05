@@ -16,7 +16,7 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public void move(int x, int y) {
+	public void move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}
