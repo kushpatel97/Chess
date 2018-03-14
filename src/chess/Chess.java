@@ -9,12 +9,27 @@ public class Chess {
 		
 		Piece[][] board = Board.buildBoard();	
 		Board.printBoard(board);
-		board[1][0].move(board, 2, 0);
+		
+		board[1][2].move(board, 3, 2);
+		Board.printBoard(board);
+		
 		board[6][1].move(board, 4, 1);
-		board[4][1].move(board, 3, 1);
 		Board.printBoard(board);
-		board[2][0].move(board, 3, 1);
+		
+		board[3][2].move(board, 4, 1);
 		Board.printBoard(board);
+		
+		board[4][1].move(board, 5, 1);
+		Board.printBoard(board);
+		
+		board[6][2].move(board, 5, 1);
+		Board.printBoard(board);
+		
+		board[7][7].move(board, 7, 0);
+		
+		//board[4][1].move(board, 3, 1);
+		//Board.printBoard(board);
+		
 	}
 
 
