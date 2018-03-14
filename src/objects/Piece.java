@@ -16,6 +16,15 @@ public abstract class Piece {
         public boolean isTeam() {
                 return team;
         }
+        
+        public boolean isOppositeTeam(Piece x) {
+        		boolean team = this.team;
+        		boolean team2 = x.team;
+        		if (team == team2) {
+        			return false;
+        		}
+        		return true;
+        }
 
 
     // Update Location + Delete Past Spot
@@ -33,8 +42,10 @@ public abstract class Piece {
 		board[thisx][thisy] = null;
 		board[x][y].x = x;
 		board[x][y].y = y;
+		board[x][y].firstmove = false;
     }
 
+    
     // Move Piece
     public abstract void move(Piece[][] board, int x, int y);
 

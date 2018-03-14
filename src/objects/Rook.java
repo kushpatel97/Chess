@@ -32,15 +32,44 @@ public class Rook extends Piece {
 					// check condition
 					 for (int i = oldy+1; i < y; i++) {
 						 if (!Board.isEmpty(board, x, i)) {
-							 System.out.println("MOVE DOES NOT WORK");
+							 System.out.println("MOVE DOES NOT WORKbbb");
+							 return;
 						 }
 					 }
+					 if (!Board.isEmpty(board, x, y)) {
+						 if (board[oldx][oldy].isOppositeTeam(board[x][y])) {
+							 // kill
+							 board[oldx][oldy].kill(board, this.x, this.y, x, y);
+						 } else {
+							 // spot is filled w teammate
+							 System.out.println("MOVE DOES NOT WORKzzz");
+							 return;
+						 }
+					 } else {
+						 // update location
+						 board[oldx][oldy].update(board, x, y);
+					 }
+					 
 				} else { // GOING LEFT
 					// check condition
 					for (int i = oldy-1; i > y; i--) {
 						 if (!Board.isEmpty(board, x, i)) {
 							 System.out.println("MOVE DOES NOT WORK");
+							 return;
 						 }
+					}
+					if (!Board.isEmpty(board, x, y)) {
+						 if (board[oldx][oldy].isOppositeTeam(board[x][y])) {
+							 // kill
+							 board[oldx][oldy].kill(board, this.x, this.y, x, y);
+						 } else {
+							 // spot is filled w teammate
+							 System.out.println("MOVE DOES NOT WORKzzz");
+							 return;
+						 }
+					 } else {
+						 // update location
+						 board[oldx][oldy].update(board, x, y);
 					 }
 				}
 				
@@ -54,15 +83,43 @@ public class Rook extends Piece {
 					// check condition
 					for (int i = oldx-1; i > x; i--) {
 						 if (!Board.isEmpty(board, i, y)) {
-							 System.out.println("MOVE DOES NOT WORK");
+							 System.out.println("MOVE DOES NOT WORKaaaa");
+							 return;
 						 }
+					}
+					if (!Board.isEmpty(board, x, y)) {
+						 if (board[oldx][oldy].isOppositeTeam(board[x][y])) {
+							 // kill
+							 board[oldx][oldy].kill(board, this.x, this.y, x, y);
+						 } else {
+							 // spot is filled w teammate
+							 System.out.println("MOVE DOES NOT WORKzzz");
+							 return;
+						 }
+					 } else {
+						 // update location
+						 board[oldx][oldy].update(board, x, y);
 					 }
 				} else { // GOING DOWN
 					// check condition
-					for (int i = oldx+1; i < y; i++) {
+					for (int i = oldx+1; i < x; i++) {
 						 if (!Board.isEmpty(board, i, y)) {
-							 System.out.println("MOVE DOES NOT WORK");
+							 System.out.println("MOVE DOES NOT WORKhhhh");
+							 return;
 						 }
+					}
+					if (!Board.isEmpty(board, x, y)) {
+						 if (board[oldx][oldy].isOppositeTeam(board[x][y])) {
+							 // kill
+							 board[oldx][oldy].kill(board, this.x, this.y, x, y);
+						 } else {
+							 // spot is filled w teammate
+							 System.out.println("MOVE DOES NOT WORKzzz");
+							 return;
+						 }
+					 } else {
+						 // update location
+						 board[oldx][oldy].update(board, x, y);
 					 }
 				}
 				
