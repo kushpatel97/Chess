@@ -46,7 +46,7 @@ public class Chess {
 		}
 		
 		// make sure letters and numbers are within range
-		if ((!(s.charAt(0) >= 'a' && s.charAt(0) <= 'h')) || (!(s.charAt(3) >= 'a' && s.charAt(3) == 'h'))) {
+		if ((!(s.charAt(0) >= 'a' && s.charAt(0) <= 'h')) || (!(s.charAt(3) >= 'a' && s.charAt(3) <= 'h'))) {
 			System.out.println("Invalid Input!");
 			return false;
 		}
