@@ -62,6 +62,7 @@ public class Board {
 		board[7][6] = new Knight(7, 6, true);
 		board[7][7] = new Rook(7, 7, true);
 		
+		board[2][4] = new Rook(2, 4, true);
 		
 		return board;
 	}
@@ -144,6 +145,7 @@ public class Board {
 			}
 			// BORDER: BOTTOM (Letters)
 		}
+		System.out.println();
 	}
 	
 	public static boolean isEmpty(Piece[][] board, int x, int y) {
@@ -152,5 +154,12 @@ public class Board {
 		}
 		
 		return false;
+	}
+	
+	
+	// Translates human input to board language - string must be inputted correctly
+	public static String translate(String s) {
+		return "";
+		
 	}
 }

@@ -14,8 +14,6 @@ public class Pawn extends Piece {
 		
 		this.team = team;
 	}
-	
-	
 
 	@Override
 	public void move(Piece[][] board, int x, int y) {
