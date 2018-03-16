@@ -22,8 +22,6 @@ public class Pawn extends Piece {
 		// BLACK PAWN
 		if (this.team == false) {
 			if (!(Board.isEmpty(board, x, y)) && board[x][y].team == true && (x - this.x == 1) && (Math.abs(y - this.y) == 1)) {
-				System.out.println("AYE AYE CAPTAIN");
-				 
 				board[x][y].kill(board, this.x, this.y, x, y);
 				return;
 			}
@@ -31,57 +29,36 @@ public class Pawn extends Piece {
 			if (this.firstmove) { // can move 2 spaces forward
 				if ((Board.isEmpty(board, x, y)) && (x - this.x == 1 || x - this.x == 2) && (y - this.y == 0)) {
 					// Move the Piece
-					System.out.println("VALID MOVE");
 					board[this.x][this.y].update(board, x, y);
 				} else {
-					int bx = x - this.x;
-					int by = y - this.y;
-					System.out.println("X: " + bx);
-					System.out.println("Y: " + by);
 					System.out.println("Error. Not a valid move.");
 				}
 			} else {
 				if ((Board.isEmpty(board, x, y)) && (x - this.x == 1) && (y - this.y == 0)) {
 					// Move the Piece
-					System.out.println("SUCCESSFUL MOVE!");
 					board[this.x][this.y].update(board, x, y);
 				} else {
-					int bx = x - this.x;
-					int by = y - this.y;
-					System.out.println("X: " + bx);
-					System.out.println("Y: " + by);
 					System.out.println("Error. Not a valid move.");
 				}
 			}
 		// WHITE PAWN
 		} else if (this.team == true) {
 			if (!(Board.isEmpty(board, x, y)) && board[x][y].team == false && (this.x - x == 1) && (Math.abs(y - this.y) == 1)) {
-				System.out.println("AYE AYE CAPTAIN");
 				board[x][y].kill(board, this.x, this.y, x, y);
 				return;
 			}	
 			if (this.firstmove) { // can move 2 spaces forward
 				if ((Board.isEmpty(board, x, y)) && (this.x - x == 1 || this.x - x == 2) && (y - this.y == 0)) {
 					// Move the Piece
-					System.out.println("VALID MOVE");
 					board[this.x][this.y].update(board, x, y);
 				} else {
-					int bx = this.x - x;
-					int by = this.y - y;
-					System.out.println("X: " + bx);
-					System.out.println("Y: " + by);
 					System.out.println("Error. Not a valid move.");
 				}
 			} else {
 				if ((Board.isEmpty(board, x, y)) && (this.x - x == 1) && (this.y - y == 0)) {
 					// Move the Piece
-					System.out.println("SUCCESSFUL MOVE!");
 					board[this.x][this.y].update(board, x, y);
 				} else {
-					int bx = this.x - x;
-					int by = this.y - y;
-					System.out.println("X: " + bx);
-					System.out.println("Y: " + by);
 					System.out.println("Error. Not a valid move.");
 				}
 			}

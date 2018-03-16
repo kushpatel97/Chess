@@ -62,14 +62,12 @@ public class Board {
 		board[7][6] = new Knight(7, 6, true);
 		board[7][7] = new Rook(7, 7, true);
 		
-		board[2][4] = new Rook(2, 4, true);
-		
 		return board;
 	}
 	
 	// Helper for printBoard
 	private static void printName(Piece spot, char piece) {
-		boolean team = spot.isTeam();
+		boolean team = spot.getTeam();
 		if (team == true) { // white
 			System.out.print("w" + piece + " ");
 		} else { // black
@@ -158,8 +156,16 @@ public class Board {
 	
 	
 	// Translates human input to board language - string must be inputted correctly
-	public static String translate(String s) {
-		return "";
+	public static int[] translate(String s) {
+		int[] arr = new int[4];
 		
+		char a1 = (char) (s.charAt(0)-49);
+		arr[1] = Character.getNumericValue(a1);
+		arr[0] = 8 - Character.getNumericValue(s.charAt(1));
+		char a3 = (char) (s.charAt(3)-49);
+		arr[3] = Character.getNumericValue(a3);
+		arr[2] = 8 - Character.getNumericValue(s.charAt(4));
+		
+		return arr;
 	}
 }

@@ -13,7 +13,7 @@ public abstract class Piece {
                 this.team = team;
         }
 
-        public boolean isTeam() {
+        public boolean getTeam() {
                 return team;
         }
         
