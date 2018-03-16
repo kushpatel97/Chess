@@ -47,6 +47,6 @@ public abstract class Piece {
 
     
     // Move Piece
-    public abstract void move(Piece[][] board, int x, int y);
+    public abstract boolean move(Piece[][] board, int x, int y);
 
 }

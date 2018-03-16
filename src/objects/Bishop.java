@@ -89,7 +89,7 @@ public class Bishop extends Piece {
 	
 	
 	@Override
-	public void move(Piece[][] board, int x, int y) {
+	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		int oldx = this.x;
 		int oldy = this.y;
@@ -98,20 +98,20 @@ public class Bishop extends Piece {
 			// Move 
 			if (Board.isEmpty(board, x, y)) {
 				board[oldx][oldy].update(board, x, y);
-				return;
+				return true;
 			}
 			
 			// Kill
 			if (board[oldx][oldy].isOppositeTeam(board[x][y])) {
 				board[oldx][oldy].kill(board, this.x, this.y, x, y);
-				return;
+				return true;
 			} else {
 				System.out.println("Invalid Move: same team blocking");
-				return;
+				return true;
 			}
 		} else {
 			System.out.println("Invalid Move");
-			return;
+			return false;
 		}
 		
 		

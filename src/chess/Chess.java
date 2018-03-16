@@ -19,40 +19,39 @@ public class Chess {
 		boolean turn = true; // white = true, black = false
 		
 		while (true) { // ** condition needs to be whether or not the King is dead or game is over
-			if (turn) { // White team
-				System.out.println("White's move: ");
-				String s = br.readLine().trim().toLowerCase();
+			if (turn) { System.out.print("White's move: ");
+			} else { System.out.print("Black's move: "); }
+			
+			String s = br.readLine().trim().toLowerCase();
+			
+			if (checkInput(s)) {
+				int[] trans = Board.translate(s);
 				
-				if (checkInput(s)) {
-					int[] trans = Board.translate(s);
-					// check if piece is white
-					if (board[trans[0]][trans[1]].getTeam() == false) {
-						System.out.println("Invalid Input: start state is of type wrong team");
-						continue;
-					}
-					board[trans[0]][trans[1]].move(board, trans[2], trans[3]);
-					Board.printBoard(board);
-					turn = false;
+				// if start state is NULL
+				if (board[trans[0]][trans[1]] == null) {
+					System.out.println("*Invalid Input: start state is null*");
+					System.out.println();
+					continue;
 				}
-			} else { // Black team
-				System.out.println("Black's move: ");
-				String s = br.readLine().trim().toLowerCase();
 				
-				if (checkInput(s)) {
-					int[] trans = Board.translate(s);
-					// check if piece is black
-					if (board[trans[0]][trans[1]].getTeam() == true) {
-						System.out.println("Invalid Input: start state is of type wrong team");
-						continue;
-					}
-					board[trans[0]][trans[1]].move(board, trans[2], trans[3]);
+				// start state is wrong team
+				if (board[trans[0]][trans[1]].getTeam() == !turn) {
+					System.out.println("*Invalid Input: start state is of type wrong team*");
+					System.out.println();
+					continue;
+				}
+				
+				// if move is not valid
+				if (board[trans[0]][trans[1]].move(board, trans[2], trans[3])) {
 					Board.printBoard(board);
-					turn = true;
+					turn = !turn;
+				} else {
+					System.out.println("*Invalid Input: error with piece movement*");
+					System.out.println();
+					continue;
 				}
 			}
 		}
-		
-		
 		
 	}
 
