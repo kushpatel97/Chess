@@ -11,7 +11,6 @@ public class Board {
 		System.out.println("By: Alex Louie + Kush Patel");
 		System.out.println();
 		System.out.println("===================================");
-		System.out.println();
 	}
 	
 	public static Piece[][] buildBoard() {

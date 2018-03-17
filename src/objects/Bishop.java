@@ -42,13 +42,10 @@ public class Bishop extends Piece {
 				oldx--; 
 				oldy--;
 				if (!Board.isEmpty(board, oldx, oldy)) {
-					System.out.println("X: " + oldx);
-					System.out.println("Y: " + oldy);
 					return false;
 				}
 			}
 		} else {
-			System.out.println("Code Input Error: Dir not set properly.");
 			return false;
 		}
 		
@@ -106,11 +103,9 @@ public class Bishop extends Piece {
 				board[oldx][oldy].kill(board, this.x, this.y, x, y);
 				return true;
 			} else {
-				System.out.println("Invalid Move: same team blocking");
 				return true;
 			}
 		} else {
-			System.out.println("Invalid Move");
 			return false;
 		}
 		

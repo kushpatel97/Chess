@@ -24,19 +24,21 @@ public class Chess {
 			
 			String s = br.readLine().trim().toLowerCase();
 			
+			System.out.println(); // formatting space
+			
 			if (checkInput(s)) {
 				int[] trans = Board.translate(s);
 				
 				// if start state is NULL
 				if (board[trans[0]][trans[1]] == null) {
-					System.out.println("*Invalid Input: start state is null*");
+					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
 				}
 				
 				// start state is wrong team
 				if (board[trans[0]][trans[1]].getTeam() == !turn) {
-					System.out.println("*Invalid Input: start state is of type wrong team*");
+					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
 				}
@@ -46,7 +48,7 @@ public class Chess {
 					Board.printBoard(board);
 					turn = !turn;
 				} else {
-					System.out.println("*Invalid Input: error with piece movement*");
+					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
 				}

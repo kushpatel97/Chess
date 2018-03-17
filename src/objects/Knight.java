@@ -42,11 +42,9 @@ public class Knight extends Piece {
 				board[oldx][oldy].kill(board, this.x, this.y, x, y);
 				return true;
 			} else {
-				System.out.println("Invalid Move: same team blocking");
 				return false;
 			}
 		} else {
-			System.out.println("Invalid Move");
 			return false;
 		}
 		

@@ -80,7 +80,6 @@ public class Queen extends Piece {
 						}
 					}
 				} else {
-					System.out.println("Code Input Error: Dir not set properly.");
 					return false;
 				}
 				
@@ -97,8 +96,6 @@ public class Queen extends Piece {
 		int dx = oldx - x;
 		int dy = oldy - y;
 		
-		System.out.println("X: " + dx);
-		System.out.println("Y: " + dy);
 		
 		if (deltax == 0 && deltay != 0) { // horizontal
 			if (dy < 0) { // moving right
@@ -114,20 +111,14 @@ public class Queen extends Piece {
 			}
 		} else if (deltax == deltay) { // diagonal
 			if (dx > 0 && dy < 0) {
-				System.out.println("1");
 				return lineCheck(board, oldx, oldy, x, y, 1);
 			} else if (dx < 0 && dy < 0) {
-				System.out.println("2");
 				return lineCheck(board, oldx, oldy, x, y, 2);
 			} else if (dx < 0 && dy > 0) {
-				System.out.println("3");
 				return lineCheck(board, oldx, oldy, x, y, 3);
 			} else if (dx > 0 && dy > 0) {
-				System.out.println("4");
 				return lineCheck(board, oldx, oldy, x, y, 4);
 			}
-		} else {
-			System.out.println("Not a valid move.");
 		}
 		
 		return false;
@@ -151,11 +142,9 @@ public class Queen extends Piece {
 				board[oldx][oldy].kill(board, this.x, this.y, x, y);
 				return true;
 			} else {
-				System.out.println("Invalid Move: same team blocking");
 				return false;
 			}
 		} else {
-			System.out.println("Invalid Move");
 			return false;
 		}
 	}

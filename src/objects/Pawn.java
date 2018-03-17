@@ -32,7 +32,6 @@ public class Pawn extends Piece {
 					board[this.x][this.y].update(board, x, y);
 					return true;
 				} else {
-					System.out.println("Error. Not a valid move.");
 					return false;
 				}
 			} else {
@@ -41,7 +40,6 @@ public class Pawn extends Piece {
 					board[this.x][this.y].update(board, x, y);
 					return true;
 				} else {
-					System.out.println("Error. Not a valid move.");
 					return false;
 				}
 			}
@@ -57,7 +55,6 @@ public class Pawn extends Piece {
 					board[this.x][this.y].update(board, x, y);
 					return true;
 				} else {
-					System.out.println("Error. Not a valid move.");
 					return false;
 				}
 			} else {
@@ -66,7 +63,6 @@ public class Pawn extends Piece {
 					board[this.x][this.y].update(board, x, y);
 					return true;
 				} else {
-					System.out.println("Error. Not a valid move.");
 					return false;
 				}
 			}
