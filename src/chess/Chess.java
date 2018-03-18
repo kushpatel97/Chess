@@ -36,7 +36,7 @@ public class Chess {
 				drawProposal = false;
 			}
 			
-			if (checkInput(s, turn) || drawProposal) {
+			if (checkInput(s, turn)) {
 				int[] trans = Board.translate(s);
 				
 				// if start state is NULL
@@ -73,16 +73,20 @@ public class Chess {
 	public static boolean checkInput(String s, boolean turn) {
 		if (s.length() != 5 || s.charAt(2) != ' ') {
 			if (s.length() >= 6) {
+				// resign
 				if (s.equals("resign")) {
 					endGame(!turn, false);
 				}
 				
+				// draw
 				if (checkInput(s.substring(0, 5), turn)) {
 					if (s.substring(6).equals("draw?")) {
 						drawProposal = true;
 						return true;
 					}
 				}
+				
+				
 			}
 			
 			// System.out.println("Invalid Input: format incorrect");
@@ -126,8 +130,8 @@ public class Chess {
 	}
 	
 	public static void endGame(boolean team, boolean draw) { // input is winner, draw is true if draw
-		if (team && !draw) System.out.println("White wins");
-		else if (draw) System.out.println("draw");
+		if (draw) System.out.println("draw");
+		else if (team) System.out.println("White wins");
 		else System.out.println("Black wins");
 		
 		System.exit(0);

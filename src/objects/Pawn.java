@@ -8,6 +8,8 @@ public class Pawn extends Piece {
 	// boolean team;
 	// boolean alive = true;
 	
+	boolean promotion = false;
+	
 	public Pawn(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;

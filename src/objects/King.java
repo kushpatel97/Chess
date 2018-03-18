@@ -3,7 +3,9 @@ package objects;
 import board.Board;
 
 public class King extends Piece {
-
+	
+	static boolean castle = false;
+	
 	public King(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;
@@ -22,6 +24,17 @@ public class King extends Piece {
 			return true;
 		}
 		
+		Piece king = board[oldx][oldy];
+		// Castling
+		
+		// **NOTICE: must put extra check conditions in here
+		if ((king.getTeam() == true && oldx == 7 && oldy == 4 && x == 7 && y == 6 && king.firstmove && board[x][y+1].firstmove) || (king.getTeam() == false && oldx == 0 && oldy == 4 && x == 0 && y == 6 && king.firstmove && board[x][y+1].firstmove)) {
+			if (Board.isEmpty(board, oldx, oldy+1) && Board.isEmpty(board, oldx, oldy+2)) {
+				castle = true;
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
@@ -35,6 +48,10 @@ public class King extends Piece {
 			// Move 
 			if (Board.isEmpty(board, x, y)) {
 				board[oldx][oldy].update(board, x, y);
+				if (castle) {
+					if (board[x][y].getTeam()) board[7][7].update(board, 7, 5);
+					if (!board[x][y].getTeam()) board[0][7].update(board, 0, 5);
+				}
 				return true;
 			}
 			
