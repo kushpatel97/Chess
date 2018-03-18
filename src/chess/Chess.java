@@ -86,6 +86,8 @@ public class Chess {
 					}
 				}
 				
+				//Pawn.promotion = true;
+				
 				
 			}
 			

@@ -10,7 +10,8 @@ public class Knight extends Piece {
 		this.team = team;
 	}
 	
-	private boolean isPathClear(Piece[][] board, int x, int y) {
+	@Override
+	public boolean isPathClear(Piece[][] board, int x, int y) {
 		int oldx = this.x;
 		int oldy = this.y;
 		
@@ -24,7 +25,7 @@ public class Knight extends Piece {
 		return false;
 	}
 	
-	@Override
+	/*@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		int oldx = this.x;
@@ -48,6 +49,6 @@ public class Knight extends Piece {
 			return false;
 		}
 		
-	}
+	}*/
 
 }

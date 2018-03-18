@@ -52,7 +52,8 @@ public class Bishop extends Piece {
 		return true;
 	}
 	
-	private boolean isPathClear(Piece[][] board, int x, int y) {
+	@Override
+	public boolean isPathClear(Piece[][] board, int x, int y) {
 		
 		int oldx = this.x;
 		int oldy = this.y;
@@ -67,16 +68,12 @@ public class Bishop extends Piece {
 			int dx = oldx - x;
 			int dy = oldy - y;
 			if (dx > 0 && dy < 0) { // top right
-				System.out.println("1");
 				return lineCheck(board, oldx, oldy, x, y, 1);
 			} else if (dx < 0 && dy < 0) {
-				System.out.println("2");
 				return lineCheck(board, oldx, oldy, x, y, 2);
 			} else if (dx < 0 && dy > 0) {
-				System.out.println("3");
 				return lineCheck(board, oldx, oldy, x, y, 3);
 			} else if (dx > 0 && dy > 0) {
-				System.out.println("4");
 				return lineCheck(board, oldx, oldy, x, y, 4);
 			}
 		} 
@@ -85,7 +82,7 @@ public class Bishop extends Piece {
 	}
 	
 	
-	@Override
+	/*@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		int oldx = this.x;
@@ -110,6 +107,6 @@ public class Bishop extends Piece {
 		}
 		
 		
-	}
+	}*/
 
 }
