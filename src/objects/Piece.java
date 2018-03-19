@@ -7,6 +7,7 @@ public abstract class Piece {
         int y;
         boolean firstmove = true; // true - has not moved | false - moved at least once, for Pawns + Castle
         boolean team; // true - white    false - black
+		public boolean enpassant; // only for pawns
 
         // White or Black
         public void setTeam(boolean team) {
@@ -30,6 +31,7 @@ public abstract class Piece {
     // Update Location + Delete Past Spot
     public void update(Piece[][] board, int x, int y) {
     		board[x][y] = board[this.x][this.y];
+    		board[x][y].enpassant = board[this.x][this.y].enpassant;
         board[this.x][this.y] = null;
         board[x][y].x = x;
         board[x][y].y = y;
@@ -44,9 +46,6 @@ public abstract class Piece {
 		board[x][y].y = y;
 		board[x][y].firstmove = false;
     }
-
-    
-    public abstract boolean isPathClear(Piece[][] board, int x, int y);
     
     // Move Piece
     public boolean move(Piece[][] board, int x, int y) {
@@ -72,5 +71,8 @@ public abstract class Piece {
 			return false;
 		}
 	}
+    
+   // Helper for move method
+   public abstract boolean isPathClear(Piece[][] board, int x, int y);
 
 }

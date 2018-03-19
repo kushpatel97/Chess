@@ -21,6 +21,8 @@ public class Chess {
 		boolean turn = true; // white = true, black = false
 		
 		while (true) { // ** condition needs to be whether or not the King is dead or game is over
+			Pawn.resetEnPassant(board, turn);
+			
 			if (turn) { System.out.print("White's move: ");
 			} else { System.out.print("Black's move: "); }
 			
@@ -36,7 +38,7 @@ public class Chess {
 				drawProposal = false;
 			}
 			
-			if (checkInput(s, turn)) {
+			if (checkInput(s, turn, board)) {
 				int[] trans = Board.translate(s);
 				
 				// if start state is NULL
@@ -70,7 +72,7 @@ public class Chess {
 		
 	}
 
-	public static boolean checkInput(String s, boolean turn) {
+	public static boolean checkInput(String s, boolean turn, Piece[][] board) {
 		if (s.length() != 5 || s.charAt(2) != ' ') {
 			if (s.length() >= 6) {
 				// resign
@@ -79,14 +81,24 @@ public class Chess {
 				}
 				
 				// draw
-				if (checkInput(s.substring(0, 5), turn)) {
+				if (checkInput(s.substring(0, 5), turn, board)) {
 					if (s.substring(6).equals("draw?")) {
 						drawProposal = true;
 						return true;
 					}
 				}
 				
-				//Pawn.promotion = true;
+				// pawn promotion with argument
+				int[] trans = Board.translate(s);
+				if (board[trans[0]][trans[1]] instanceof Pawn) {
+					if ((board[trans[0]][trans[1]].getTeam() && trans[2] == 0) || (!board[trans[0]][trans[1]].getTeam() && trans[2] == 7)) {
+						// white or black
+						if ((s.length() == 7) && checkInput(s.substring(0, 5), turn, board) && s.charAt(5) == ' ' && Character.isLetter(s.charAt(6))) {
+							Pawn.promotion = s.charAt(6);
+							return true;
+						} 						
+					}
+				}
 				
 				
 			}
@@ -116,6 +128,16 @@ public class Chess {
 			// System.out.println("Invalid Input: Target location cannot be the same as state location");
 			return false;
 		}
+		
+		// pawn promotion - w/o argument - queen
+		int[] trans = Board.translate(s);
+		if (board[trans[0]][trans[1]] instanceof Pawn) {
+			if ((board[trans[0]][trans[1]].getTeam() && trans[2] == 0) || (!board[trans[0]][trans[1]].getTeam() && trans[2] == 7)) {
+				// white or black
+				Pawn.promotion = 'q';				
+			}
+		}
+		
 		
 		return true;
 	}
