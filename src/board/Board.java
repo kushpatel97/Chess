@@ -61,7 +61,8 @@ public class Board {
 		board[7][6] = new Knight(7, 6, true);
 		board[7][7] = new Rook(7, 7, true);
 		
-		board[3][1] = new Pawn(3, 1, true);
+		board[4][4] = new King(3, 3, true);
+		board[5][3] = new King(1, 1, false);
 		
 		return board;
 	}

@@ -21,6 +21,7 @@ public class Chess {
 		boolean turn = true; // white = true, black = false
 		
 		while (true) { // ** condition needs to be whether or not the King is dead or game is over
+			System.out.println(Piece.isChecked(board, 4, 4));
 			Pawn.resetEnPassant(board, turn);
 			
 			if (turn) { System.out.print("White's move: ");
@@ -69,6 +70,8 @@ public class Chess {
 				System.out.println();
 			}
 		}
+		
+		// endGame(turn, false);
 		
 	}
 
