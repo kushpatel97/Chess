@@ -30,7 +30,7 @@ public class King extends Piece {
 		
 		// **NOTICE: must put extra check conditions in here
 		if ((king.getTeam() == true && oldx == 7 && oldy == 4 && x == 7 && y == 6 && king.firstmove && board[x][y+1].firstmove) || (king.getTeam() == false && oldx == 0 && oldy == 4 && x == 0 && y == 6 && king.firstmove && board[x][y+1].firstmove)) {
-			if (Board.isEmpty(board, oldx, oldy+1) && Board.isEmpty(board, oldx, oldy+2)) {
+			if (Board.isEmpty(board, oldx, oldy+1) && Board.isEmpty(board, oldx, oldy+2) && !Piece.isChecked(board, x, y) && !Piece.isChecked(board, x, y+1) && !Piece.isChecked(board, x, y+2)) {
 				castle = true;
 				return true;
 			}
