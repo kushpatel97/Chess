@@ -67,6 +67,7 @@ public class Chess {
 			} else {
 				System.out.println("Illegal move, try again");
 				System.out.println();
+				continue;
 			}
 		}
 		
@@ -84,7 +85,8 @@ public class Chess {
 			}
 		}
 		
-		if (Piece.isChecked(board, king.getx(), king.gety())) {
+		if (Piece.isChecked(board, king.getx(), king.gety(), king.getTeam())) {
+			//System.out.println("check!!!!");
 			Piece piece = null;
 			Piece spottaken = null;
 			
@@ -97,14 +99,15 @@ public class Chess {
 							for (int j2 = 0; j2 <= 7; j2++) {
 								int oldx = piece.getx();
 								int oldy = piece.gety();
-								if (!Board.isEmpty(board, i2, j2)) spottaken = board[i2][j2];
+							    spottaken = board[i2][j2];
 								if (piece.move(board, i2, j2)) {
-									if (!Piece.isChecked(board, king.getx(), king.gety())) {
-										piece.move(board, oldx, oldy);
+									if (!Piece.isChecked(board, king.getx(), king.gety(), king.getTeam())) {
+										board[piece.getx()][piece.gety()].update(board, oldx, oldy);
 										board[i2][j2] = spottaken;
+										// must make this move
 										return false;
 									}
-									piece.move(board, oldx, oldy);
+									board[piece.getx()][piece.gety()].update(board, oldx, oldy);
 									board[i2][j2] = spottaken;
 								}
 							}

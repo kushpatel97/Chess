@@ -61,7 +61,6 @@ public class Board {
 		board[7][6] = new Knight(7, 6, true);
 		board[7][7] = new Rook(7, 7, true);
 		
-		
 		return board;
 	}
 	

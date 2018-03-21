@@ -80,10 +80,10 @@ public abstract class Piece {
 		}
 	}
     
-    public static boolean isChecked(Piece[][] board, int x, int y) {
+    public static boolean isChecked(Piece[][] board, int x, int y, boolean turn) {
     		for (int i = x+1; i <= 7; i++) { // south (Rook + Queen)
     			if (!Board.isEmpty(board, i, y)) {
-    	    			if ((board[i][y] instanceof Rook || board[i][y] instanceof Queen) && board[x][y].isOppositeTeam(board[i][y])) {
+    	    			if ((board[i][y] instanceof Rook || board[i][y] instanceof Queen) && board[i][y].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -93,7 +93,7 @@ public abstract class Piece {
     		
     		for (int i = x-1; i >= 0; i--) { // north (Rook + Queen)
     			if (!Board.isEmpty(board, i, y)) {
-    	    			if ((board[i][y] instanceof Rook || board[i][y] instanceof Queen) && board[x][y].isOppositeTeam(board[i][y])) {
+    	    			if ((board[i][y] instanceof Rook || board[i][y] instanceof Queen) && board[i][y].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -103,7 +103,7 @@ public abstract class Piece {
     		
     		for (int i = y+1; i <= 7; i++) { // east (Rook + Queen)
     			if (!Board.isEmpty(board, x, i)) {
-    	    			if ((board[x][i] instanceof Rook || board[x][i] instanceof Queen) && board[x][y].isOppositeTeam(board[x][i])) {
+    	    			if ((board[x][i] instanceof Rook || board[x][i] instanceof Queen) && board[x][i].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -113,7 +113,7 @@ public abstract class Piece {
     		
     		for (int i = y-1; i >= 0; i--) { // west (Rook + Queen)
     			if (!Board.isEmpty(board, x, i)) {
-    	    			if ((board[x][i] instanceof Rook || board[x][i] instanceof Queen) && board[x][y].isOppositeTeam(board[x][i])) {
+    	    			if ((board[x][i] instanceof Rook || board[x][i] instanceof Queen) && board[x][i].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -121,9 +121,9 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y+1, j = x-1; i <= 7 && j >= 0; i++, j--) { // northeast (Bishop + Queen)
+    		for (int i = x+1, j = y-1; i <= 7 && j >= 0; i++, j--) { // northeast (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) { 
-    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
+    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[i][j].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -131,9 +131,9 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y-1, j = x-1; i >= 0 && j >= 0; i--, j--) { // northwest (Bishop + Queen)
+    		for (int i = x-1, j = y-1; i >= 0 && j >= 0; i--, j--) { // northwest (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) {
-    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
+    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[i][j].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -141,9 +141,9 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y+1, j = x+1; i <= 7 && j <= 7; i++, j++) { // southeast (Bishop + Queen)
+    		for (int i = x+1, j = y+1; i <= 7 && j <= 7; i++, j++) { // southeast (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) { 
-    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
+    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[i][j].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -151,9 +151,9 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y-1, j = x+1; i >= 0 && j <= 7; i--, j++) { // southwest (Bishop + Queen)
+    		for (int i = x-1, j = y+1; i >= 0 && j <= 7; i--, j++) { // southwest (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) {
-    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
+    	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[i][j].team != turn) {
     	    				return true;
     	    			} else {
     	    				break;
@@ -161,37 +161,37 @@ public abstract class Piece {
     			}	
     		}
     		
-    		if (board[x][y].team) { // white piece, checking for black Pawn
-    			if ((!Board.isEmpty(board, x-1, y-1) && board[x-1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y-1]) || (!Board.isEmpty(board, x-1, y+1) && board[x-1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y+1])))) { 
+    		if (turn) { // white piece, checking for black Pawn
+    			if ((!Board.isEmpty(board, x-1, y-1) && board[x-1][y-1] instanceof Pawn && board[x-1][y-1].team != turn) || (!Board.isEmpty(board, x-1, y+1) && board[x-1][y+1] instanceof Pawn && board[x-1][y+1].team != turn)) { 
     				return true;
     			}
     		} else { // black piece, checking for white Pawn
-    			if ((!Board.isEmpty(board, x+1, y-1) && board[x+1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y-1]) || (!Board.isEmpty(board, x+1, y+1) && board[x+1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y+1])))) { 
+    			if ((!Board.isEmpty(board, x+1, y-1) && board[x+1][y-1] instanceof Pawn && board[x+1][y-1].team != turn) || (!Board.isEmpty(board, x+1, y+1) && board[x+1][y+1] instanceof Pawn && board[x+1][y+1].team != turn)) { 
     				return true;
     			}
     		}
     		
     		// Knight
-    		if (!Board.isEmpty(board, x+2, y+1) && board[x+2][y+1] instanceof Knight && board[x][y].isOppositeTeam(board[x+2][y+1])) return true;
-    		if (!Board.isEmpty(board, x+2, y-1) && board[x+2][y-1] instanceof Knight && board[x][y].isOppositeTeam(board[x+2][y-1])) return true;
-    		if (!Board.isEmpty(board, x-2, y+1) && board[x-2][y+1] instanceof Knight && board[x][y].isOppositeTeam(board[x-2][y+1])) return true;
-    		if (!Board.isEmpty(board, x-2, y-1) && board[x-2][y-1] instanceof Knight && board[x][y].isOppositeTeam(board[x-2][y-1])) return true;
+    		if (!Board.isEmpty(board, x+2, y+1) && board[x+2][y+1] instanceof Knight && board[x+2][y+1].team != turn) return true;
+    		if (!Board.isEmpty(board, x+2, y-1) && board[x+2][y-1] instanceof Knight && board[x+2][y-1].team != turn) return true;
+    		if (!Board.isEmpty(board, x-2, y+1) && board[x-2][y+1] instanceof Knight && board[x-2][y+1].team != turn) return true;
+    		if (!Board.isEmpty(board, x-2, y-1) && board[x-2][y-1] instanceof Knight && board[x-2][y-1].team != turn) return true;
     		
-    		if (!Board.isEmpty(board, x+1, y+2) && board[x+1][y+2] instanceof Knight && board[x][y].isOppositeTeam(board[x+1][y+2])) return true;
-    		if (!Board.isEmpty(board, x+1, y-2) && board[x+1][y-2] instanceof Knight && board[x][y].isOppositeTeam(board[x+1][y-2])) return true;
-    		if (!Board.isEmpty(board, x-1, y+2) && board[x-1][y+2] instanceof Knight && board[x][y].isOppositeTeam(board[x-1][y+2])) return true;
-    		if (!Board.isEmpty(board, x-1, y-2) && board[x-1][y-2] instanceof Knight && board[x][y].isOppositeTeam(board[x-1][y-2])) return true;
+    		if (!Board.isEmpty(board, x+1, y+2) && board[x+1][y+2] instanceof Knight && board[x+1][y+2].team != turn) return true;
+    		if (!Board.isEmpty(board, x+1, y-2) && board[x+1][y-2] instanceof Knight && board[x+1][y-2].team != turn) return true;
+    		if (!Board.isEmpty(board, x-1, y+2) && board[x-1][y+2] instanceof Knight && board[x-1][y+2].team != turn) return true;
+    		if (!Board.isEmpty(board, x-1, y-2) && board[x-1][y-2] instanceof Knight && board[x-1][y-2].team != turn) return true;
     		
     		// King
-    		if (!Board.isEmpty(board, x+1, y) && board[x+1][y] instanceof King && board[x][y].isOppositeTeam(board[x+1][y])) return true;
-    		if (!Board.isEmpty(board, x-1, y) && board[x-1][y] instanceof King && board[x][y].isOppositeTeam(board[x-1][y])) return true;
-    		if (!Board.isEmpty(board, x, y+1) && board[x][y+1] instanceof King && board[x][y].isOppositeTeam(board[x][y+1])) return true;
-    		if (!Board.isEmpty(board, x, y-1) && board[x][y-1] instanceof King && board[x][y].isOppositeTeam(board[x][y-1])) return true;
+    		if (!Board.isEmpty(board, x+1, y) && board[x+1][y] instanceof King && board[x+1][y].team != turn) return true;
+    		if (!Board.isEmpty(board, x-1, y) && board[x-1][y] instanceof King && board[x-1][y].team != turn) return true;
+    		if (!Board.isEmpty(board, x, y+1) && board[x][y+1] instanceof King && board[x][y+1].team != turn) return true;
+    		if (!Board.isEmpty(board, x, y-1) && board[x][y-1] instanceof King && board[x][y-1].team != turn) return true;
     		
-    		if (!Board.isEmpty(board, x+1, y+1) && board[x+1][y+1] instanceof King && board[x][y].isOppositeTeam(board[x+1][y+1])) return true;
-    		if (!Board.isEmpty(board, x-1, y+1) && board[x-1][y+1] instanceof King && board[x][y].isOppositeTeam(board[x-1][y+1])) return true;
-    		if (!Board.isEmpty(board, x+1, y-1) && board[x+1][y-1] instanceof King && board[x][y].isOppositeTeam(board[x+1][y-1])) return true;
-    		if (!Board.isEmpty(board, x-1, y-1) && board[x-1][y-1] instanceof King && board[x][y].isOppositeTeam(board[x-1][y-1])) return true;
+    		if (!Board.isEmpty(board, x+1, y+1) && board[x+1][y+1] instanceof King && board[x+1][y+1].team != turn) return true;
+    		if (!Board.isEmpty(board, x-1, y+1) && board[x-1][y+1] instanceof King && board[x-1][y+1].team != turn) return true;
+    		if (!Board.isEmpty(board, x+1, y-1) && board[x+1][y-1] instanceof King && board[x+1][y-1].team != turn) return true;
+    		if (!Board.isEmpty(board, x-1, y-1) && board[x-1][y-1] instanceof King && board[x-1][y-1].team != turn) return true;
     		
     		return false;
     }

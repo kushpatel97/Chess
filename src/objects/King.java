@@ -4,7 +4,8 @@ import board.Board;
 
 public class King extends Piece {
 	
-	static boolean castle = false;
+	static boolean whitecastle = false;
+	static boolean blackcastle = false;
 	
 	public King(int x, int y, boolean team) {
 		this.x = x;
@@ -30,8 +31,9 @@ public class King extends Piece {
 		
 		// **NOTICE: must put extra check conditions in here
 		if ((king.getTeam() == true && oldx == 7 && oldy == 4 && x == 7 && y == 6 && king.firstmove && board[x][y+1].firstmove) || (king.getTeam() == false && oldx == 0 && oldy == 4 && x == 0 && y == 6 && king.firstmove && board[x][y+1].firstmove)) {
-			if (Board.isEmpty(board, oldx, oldy+1) && Board.isEmpty(board, oldx, oldy+2) && !Piece.isChecked(board, x, y) && !Piece.isChecked(board, x, y+1) && !Piece.isChecked(board, x, y+2)) {
-				castle = true;
+			if (Board.isEmpty(board, oldx, oldy+1) && Board.isEmpty(board, oldx, oldy+2) && !Piece.isChecked(board, oldx, oldy, board[oldx][oldy].getTeam()) && !Piece.isChecked(board, oldx, oldy+1, board[oldx][oldy].getTeam()) && !Piece.isChecked(board, oldx, oldy+2, board[oldx][oldy].getTeam())) {
+				if (board[oldx][oldy].getTeam()) whitecastle = true;
+				else blackcastle = true;
 				return true;
 			}
 		}
@@ -39,7 +41,7 @@ public class King extends Piece {
 		return false;
 	}
 	
-	/*@Override
+	@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		int oldx = this.x;
@@ -49,9 +51,13 @@ public class King extends Piece {
 			// Move 
 			if (Board.isEmpty(board, x, y)) {
 				board[oldx][oldy].update(board, x, y);
-				if (castle) {
+				if (whitecastle) {
 					if (board[x][y].getTeam()) board[7][7].update(board, 7, 5);
+					whitecastle = false;
+				}
+				if (blackcastle) {
 					if (!board[x][y].getTeam()) board[0][7].update(board, 0, 5);
+					blackcastle = false;
 				}
 				return true;
 			}
@@ -66,6 +72,6 @@ public class King extends Piece {
 		} else {
 			return false;
 		}
-	}*/
+	}
 
 }
