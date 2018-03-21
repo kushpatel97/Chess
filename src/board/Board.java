@@ -24,23 +24,23 @@ public class Board {
 		}
 		
 		// Black Pieces
-		board[1][0] = new Pawn(1, 0, false);
-		board[1][1] = new Pawn(1, 1, false);
-		board[1][2] = new Pawn(1, 2, false);
-		board[1][3] = new Pawn(1, 3, false);
-		board[1][4] = new Pawn(1, 4, false);
-		board[1][5] = new Pawn(1, 5, false);
-		board[1][6] = new Pawn(1, 6, false);
-		board[1][7] = new Pawn(1, 7, false);
+		//board[1][0] = new Pawn(1, 0, false);
+		//board[1][1] = new Pawn(1, 1, false);
+		//board[1][2] = new Pawn(1, 2, false);
+		//board[1][3] = new Pawn(1, 3, false);
+		//board[1][4] = new Pawn(1, 4, false);
+		//board[1][5] = new Pawn(1, 5, false);
+		//board[1][6] = new Pawn(1, 6, false);
+		//board[1][7] = new Pawn(1, 7, false);
 		
-		board[0][0] = new Rook(0, 0, false);
-		board[0][1] = new Knight(0, 1, false);
-		board[0][2] = new Bishop(0, 2, false);
-		board[0][3] = new Queen(0, 3, false);
-		board[0][4] = new King(0, 4, false);
-		board[0][5] = new Bishop(0, 5, false);
-		board[0][6] = new Knight(0, 6, false);
-		board[0][7] = new Rook(0, 7, false);
+		//board[0][0] = new Rook(0, 0, false);
+		//board[0][1] = new Knight(0, 1, false);
+		//board[0][2] = new Bishop(0, 2, false);
+		//board[0][3] = new Queen(0, 3, false);
+		board[0][5] = new King(0, 5, false);
+		//board[0][5] = new Bishop(0, 5, false);
+		//board[0][6] = new Knight(0, 6, false);
+		//board[0][7] = new Rook(0, 7, false);
 		
 		// White Pieces
 		board[6][0] = new Pawn(6, 0, true);
@@ -60,6 +60,11 @@ public class Board {
 		board[7][5] = new Bishop(7, 5, true);
 		board[7][6] = new Knight(7, 6, true);
 		board[7][7] = new Rook(7, 7, true);
+		
+		board[5][1] = new Queen(5, 1, true);
+		//board[3][4] = new Queen(3, 4, false);
+		//board[0][6] = new Rook(0, 6, true);
+		board[2][6] = new Queen(2, 6, true);
 		
 		return board;
 	}
