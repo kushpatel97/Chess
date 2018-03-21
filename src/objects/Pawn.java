@@ -86,7 +86,7 @@ public class Pawn extends Piece {
 			// diagonal kill
 			if (!(Board.isEmpty(board, x, y)) && board[x][y].team == false && (this.x - x == 1) && (Math.abs(y - this.y) == 1)) return true;
 			// move 2 spaces forward
-			if (this.firstmove && Board.isEmpty(board, x+1, y) && Board.isEmpty(board, x, y) && (this.x - x == 1 || this.x - x == 2) && (y - this.y == 0)) {
+			if (this.firstmove && Board.isEmpty(board, x, y) && Board.isEmpty(board, x+1, y) && (this.x - x == 1 || this.x - x == 2) && (y - this.y == 0)) {
 				board[this.x][this.y].enpassant = true;
 				return true;
 			}

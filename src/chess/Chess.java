@@ -21,7 +21,15 @@ public class Chess {
 		boolean turn = true; // white = true, black = false
 		
 		while (!kingDead(board, turn) && !checkMate(board, true) && !checkMate(board, false)) { // ** condition needs to be whether or not the King is dead or game is over			
-			if (staleMate(board, turn)) {
+			King king = null;
+			for (int i = 0; i <= 7; i++) {
+				for (int j = 0; j<= 7; j++) {
+					if (!Board.isEmpty(board, i, j) && board[i][j].getTeam() == turn && board[i][j] instanceof King) {
+						king = (King) board[i][j];
+					}
+				}
+			}
+			if (!Piece.isChecked(board, king.getx(), king.gety(), turn) && staleMate(board, turn)) {
 				endGame(turn, true);
 			}
 			
@@ -47,6 +55,7 @@ public class Chess {
 				
 				// if start state is NULL
 				if (board[trans[0]][trans[1]] == null) {
+					//System.out.println("1");
 					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
@@ -54,19 +63,12 @@ public class Chess {
 				
 				// start state is wrong team
 				if (board[trans[0]][trans[1]].getTeam() == !turn) {
+					//System.out.println("2");
 					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
 				}
 				
-				King king = null;
-				for (int i = 0; i <= 7; i++) {
-					for (int j = 0; j<= 7; j++) {
-						if (!Board.isEmpty(board, i, j) && board[i][j].getTeam() == turn && board[i][j] instanceof King) {
-							king = (King) board[i][j];
-						}
-					}
-				}
 				Piece spottaken = board[trans[2]][trans[3]];
 				// if move is not valid
 				if (board[trans[0]][trans[1]].move(board, trans[2], trans[3])) {
@@ -74,6 +76,7 @@ public class Chess {
 					if (Piece.isChecked(board, king.getx(), king.gety(), turn) && king.getTeam() == turn) {
 						board[trans[2]][trans[3]].update(board, trans[0], trans[1]);
 						board[trans[2]][trans[3]] = spottaken;
+						//System.out.println("3");
 						System.out.println("Illegal move, try again");
 						System.out.println();
 						continue;
@@ -81,11 +84,13 @@ public class Chess {
 					Board.printBoard(board);
 					turn = !turn;
 				} else {
+					//System.out.println("4");
 					System.out.println("Illegal move, try again");
 					System.out.println();
 					continue;
 				}
 			} else {
+				//System.out.println("5");
 				System.out.println("Illegal move, try again");
 				System.out.println();
 				continue;
@@ -136,14 +141,15 @@ public class Chess {
 								int oldx = piece.getx();
 								int oldy = piece.gety();
 							    spottaken = board[i2][j2];
+							    boolean firstmove = board[oldx][oldy].getFirstMove();
 							    if (piece.move(board, i2, j2)) {
 									if (!Piece.isChecked(board, king.getx(), king.gety(), king.getTeam())) {
-										board[piece.getx()][piece.gety()].update(board, oldx, oldy);
+										board[piece.getx()][piece.gety()].undo(board, oldx, oldy, firstmove);
 										board[i2][j2] = spottaken;
 										// must make this move
 										return false;
 									}
-									board[piece.getx()][piece.gety()].update(board, oldx, oldy);
+									board[piece.getx()][piece.gety()].undo(board, oldx, oldy, firstmove);
 									board[i2][j2] = spottaken;
 								}
 							}
@@ -181,14 +187,15 @@ public class Chess {
 								int oldx = piece.getx();
 								int oldy = piece.gety();
 							    spottaken = board[i2][j2];
+							    boolean firstmove = board[oldx][oldy].getFirstMove();
 								if (piece.move(board, i2, j2)) {
 									if (!Piece.isChecked(board, king.getx(), king.gety(), king.getTeam())) {
-										board[piece.getx()][piece.gety()].update(board, oldx, oldy);
+										board[piece.getx()][piece.gety()].undo(board, oldx, oldy, firstmove);
 										board[i2][j2] = spottaken;
 										// must make this move
 										return false;
 									}
-									board[piece.getx()][piece.gety()].update(board, oldx, oldy);
+									board[piece.getx()][piece.gety()].undo(board, oldx, oldy, firstmove);
 									board[i2][j2] = spottaken;
 								}
 							}

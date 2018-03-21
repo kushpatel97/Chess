@@ -18,6 +18,10 @@ public abstract class Piece {
                 return team;
         }
         
+        public boolean getFirstMove() {
+        		return firstmove;
+        }
+        
         public boolean isOppositeTeam(Piece x) {
         		boolean team = this.team;
         		boolean team2 = x.team;
@@ -44,6 +48,16 @@ public abstract class Piece {
         board[x][y].x = x;
         board[x][y].y = y;
         this.firstmove = false;
+    }
+    
+    // Update Location + Delete Past Spot
+    public void undo(Piece[][] board, int x, int y, boolean firstmove) {
+    		board[x][y] = board[this.x][this.y];
+    		board[x][y].firstmove = firstmove;
+    		board[x][y].enpassant = board[this.x][this.y].enpassant;
+        board[this.x][this.y] = null;
+        board[x][y].x = x;
+        board[x][y].y = y;
     }
     
     // For Killing Other Pieces
