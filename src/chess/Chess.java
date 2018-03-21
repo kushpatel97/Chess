@@ -14,14 +14,13 @@ public class Chess {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		// INITIALIZE
-		Board.welcome();
+		//Board.welcome();
 		Piece[][] board = Board.buildBoard();	
 		Board.printBoard(board);
 		
 		boolean turn = true; // white = true, black = false
 		
-		while (true) { // ** condition needs to be whether or not the King is dead or game is over
-			System.out.println(Piece.isChecked(board, 4, 4));
+		while (!checkMate(board, true) && !checkMate(board, false)) { // ** condition needs to be whether or not the King is dead or game is over
 			Pawn.resetEnPassant(board, turn);
 			
 			if (turn) { System.out.print("White's move: ");
@@ -71,8 +70,53 @@ public class Chess {
 			}
 		}
 		
-		// endGame(turn, false);
+		endGame(!turn, false);
 		
+	}
+	
+	public static boolean checkMate(Piece[][] board, boolean turn) {
+		King king = null;
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				if (!Board.isEmpty(board, i, j) && board[i][j].getTeam() == turn && board[i][j] instanceof King) {
+					king = (King) board[i][j];
+				}
+			}
+		}
+		
+		if (Piece.isChecked(board, king.getx(), king.gety())) {
+			Piece piece = null;
+			Piece spottaken = null;
+			
+			for (int i = 0; i <= 7; i++) {
+				for (int j = 0; j <= 7; j++) {
+					if (!Board.isEmpty(board, i, j) && board[i][j].getTeam() == turn) {
+						// do every move and check if check works or not
+						piece = board[i][j];
+						for (int i2 = 0; i2 <= 7; i2++) {
+							for (int j2 = 0; j2 <= 7; j2++) {
+								int oldx = piece.getx();
+								int oldy = piece.gety();
+								if (!Board.isEmpty(board, i2, j2)) spottaken = board[i2][j2];
+								if (piece.move(board, i2, j2)) {
+									if (!Piece.isChecked(board, king.getx(), king.gety())) {
+										piece.move(board, oldx, oldy);
+										board[i2][j2] = spottaken;
+										return false;
+									}
+									piece.move(board, oldx, oldy);
+									board[i2][j2] = spottaken;
+								}
+							}
+						}
+					}
+				}
+			}	
+
+			return true;
+		} 
+
+		return false;
 	}
 
 	public static boolean checkInput(String s, boolean turn, Piece[][] board) {

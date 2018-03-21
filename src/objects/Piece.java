@@ -26,6 +26,14 @@ public abstract class Piece {
         		}
         		return true;
         }
+        
+    	public int getx() {
+    		return this.x;
+    	}
+    	
+    	public int gety() {
+    		return this.y;
+    	}
 
 
     // Update Location + Delete Past Spot
@@ -113,7 +121,7 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y+1, j = x-1; i <= 7 || j >= 0; i++, j--) { // northeast (Bishop + Queen)
+    		for (int i = y+1, j = x-1; i <= 7 && j >= 0; i++, j--) { // northeast (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) { 
     	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
     	    				return true;
@@ -123,7 +131,7 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y-1, j = x-1; i >= 0 || j >= 0; i--, j--) { // northwest (Bishop + Queen)
+    		for (int i = y-1, j = x-1; i >= 0 && j >= 0; i--, j--) { // northwest (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) {
     	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
     	    				return true;
@@ -133,7 +141,7 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y+1, j = x+1; i <= 7 || j <= 7; i++, j++) { // southeast (Bishop + Queen)
+    		for (int i = y+1, j = x+1; i <= 7 && j <= 7; i++, j++) { // southeast (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) { 
     	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
     	    				return true;
@@ -143,7 +151,7 @@ public abstract class Piece {
     			}	
     		}
     		
-    		for (int i = y-1, j = x+1; i >= 0 || j <= 7; i--, j++) { // southwest (Bishop + Queen)
+    		for (int i = y-1, j = x+1; i >= 0 && j <= 7; i--, j++) { // southwest (Bishop + Queen)
     			if (!Board.isEmpty(board, i, j)) {
     	    			if ((board[i][j] instanceof Bishop || board[i][j] instanceof Queen) && board[x][y].isOppositeTeam(board[i][j])) {
     	    				return true;
@@ -154,11 +162,11 @@ public abstract class Piece {
     		}
     		
     		if (board[x][y].team) { // white piece, checking for black Pawn
-    			if ((board[x-1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y-1]) || (board[x-1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y+1])))) { 
+    			if ((!Board.isEmpty(board, x-1, y-1) && board[x-1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y-1]) || (!Board.isEmpty(board, x-1, y+1) && board[x-1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x-1][y+1])))) { 
     				return true;
     			}
     		} else { // black piece, checking for white Pawn
-    			if ((board[x+1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y-1]) || (board[x+1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y+1])))) { 
+    			if ((!Board.isEmpty(board, x+1, y-1) && board[x+1][y-1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y-1]) || (!Board.isEmpty(board, x+1, y+1) && board[x+1][y+1] instanceof Pawn && board[x][y].isOppositeTeam(board[x+1][y+1])))) { 
     				return true;
     			}
     		}

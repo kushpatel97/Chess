@@ -21,7 +21,7 @@ public class King extends Piece {
 		int deltax = Math.abs(x - oldx);
 		int deltay = Math.abs(y - oldy);
 		
-		if ((deltax == deltay) || (deltax == 1 && deltay == 0) || (deltax == 0 && deltay == 1)) {
+		if (((deltax == deltay) && deltax == 1 && deltay == 1) || (deltax == 1 && deltay == 0) || (deltax == 0 && deltay == 1)) {
 			return true;
 		}
 		

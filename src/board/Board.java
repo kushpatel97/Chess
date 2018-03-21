@@ -147,6 +147,10 @@ public class Board {
 	}
 	
 	public static boolean isEmpty(Piece[][] board, int x, int y) {
+		if (x > 7 || x < 0 || y > 7 || y < 0) { // out of range
+			return true;
+		}
+		
 		if (board[x][y] == null) {
 			return true;
 		}
