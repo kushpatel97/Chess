@@ -3,25 +3,55 @@ import board.*;
 
 public abstract class Piece {
         // Location
+		/**
+		 * The x coordinate of the Piece
+		 */
         int x;
+        /**
+         * The y coordinate of the Piece
+         */
         int y;
+        /**
+         * A value that determines if it is the first time a piece has been moved
+         */
         boolean firstmove = true; // true - has not moved | false - moved at least once, for Pawns + Castle
+        /**
+         * True = White Team<br>
+         * False = Black Team
+         */
         boolean team; // true - white    false - black
+        /**
+         * True if enpassanted
+         */
 		public boolean enpassant; // only for pawns
 
         // White or Black
+		/**
+		 * Sets team
+		 * @param team True is White, False is Black
+		 */
         public void setTeam(boolean team) {
                 this.team = team;
         }
-
+        /**
+         * Returns Team
+         * @return True is White, False is Black
+         */
         public boolean getTeam() {
                 return team;
         }
-        
+        /**
+         * Return boolean for first move
+         * @return True if it is the Pawn's first move
+         */
         public boolean getFirstMove() {
         		return firstmove;
         }
-        
+        /**
+         * Check to see if the piece is on the opposite team
+         * @param x The Piece object
+         * @return True if piece is not on the other team
+         */
         public boolean isOppositeTeam(Piece x) {
         		boolean team = this.team;
         		boolean team2 = x.team;
@@ -30,17 +60,29 @@ public abstract class Piece {
         		}
         		return true;
         }
-        
+        /**
+         * Returns the X coordinate of the Piece
+         * @return X coordinate
+         */
     	public int getx() {
     		return this.x;
     	}
-    	
+    	/**
+    	 * Returns the Y coordinate of the piece
+    	 * @return Y coordinate
+    	 */
     	public int gety() {
     		return this.y;
     	}
 
 
     // Update Location + Delete Past Spot
+    	/**
+    	 * Updates location and deletes past spots
+    	 * @param board The board that the piece is on
+    	 * @param x X coordinate of the piece
+    	 * @param y Y coordinate of the piece
+    	 */
     public void update(Piece[][] board, int x, int y) {
     		board[x][y] = board[this.x][this.y];
     		board[x][y].enpassant = board[this.x][this.y].enpassant;
@@ -51,6 +93,13 @@ public abstract class Piece {
     }
     
     // Update Location + Delete Past Spot
+    /**
+     * Undo's move and updates board
+     * @param board The board that the piece is on
+     * @param x X coordinate of the piece
+  	 * @param y Y coordinate of the piece
+     * @param firstmove True if it the Pawn's first move
+     */
     public void undo(Piece[][] board, int x, int y, boolean firstmove) {
     		board[x][y] = board[this.x][this.y];
     		board[x][y].firstmove = firstmove;
@@ -61,6 +110,14 @@ public abstract class Piece {
     }
     
     // For Killing Other Pieces
+    /**
+     * Take out another piece
+     * @param board The board that the piece is on
+     * @param x end X coordinate of the piece
+  	 * @param y end Y coordinate of the piece
+  	 * @param thisx starting x coordinate of the piece
+  	 * @param thisy starting y coordinate of the piece
+     */
     public void kill(Piece[][] board, int thisx, int thisy, int x, int y) {
     		board[x][y] = board[thisx][thisy];
 		board[thisx][thisy] = null;
@@ -70,6 +127,13 @@ public abstract class Piece {
     }
     
     // Move Piece
+    /**
+     * Only possible moves of the type of piece
+     * @param board The board that the piece is on
+     * @param x X coordinate of the Piece
+     * @param y Y coordinate of the Piece
+     * @return True if the move is successful
+     */
     public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
 		int oldx = this.x;
@@ -93,7 +157,14 @@ public abstract class Piece {
 			return false;
 		}
 	}
-    
+    /**
+     * Check to see if a king is in check
+     * @param board The board that the piece is on
+     * @param x X coordinate of the Piece
+     * @param y Y coordinate of the Piece
+     * @param turn True is White, False is Black
+     * @return Ture if king is checked
+     */
     public static boolean isChecked(Piece[][] board, int x, int y, boolean turn) {
     		for (int i = x+1; i <= 7; i++) { // south (Rook + Queen)
     			if (!Board.isEmpty(board, i, y)) {
@@ -211,6 +282,13 @@ public abstract class Piece {
     }
     
    // Helper for move method
+    /**
+     * A check to determine if a path is clear
+     * @param board The board that the piece is on
+     * @param x X coordinate of the Piece
+     * @param y Y coordinate of the Piece
+     * @return True if path is clear
+     */
    public abstract boolean isPathClear(Piece[][] board, int x, int y);
 
 }

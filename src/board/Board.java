@@ -1,9 +1,24 @@
 package board;
 
 import objects.*;
-
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ *
+ */
 public class Board {
+	/**
+	 * An 8 by 8 Piece Array that holds the value of chess pieces.
+	 * Pieces on the board are referenced by board positions.
+	 * <p>
+	 * Board's top left corner =  a8<br>
+	 * Board's top right corner = h1
+	 */
 	
+	/**
+	 * Prints a welcome statement with author's name.
+	 */
 	public static void welcome() {
 		System.out.println("===================================");
 		System.out.println();
@@ -13,6 +28,10 @@ public class Board {
 		System.out.println("===================================");
 	}
 	
+	/**
+	 * Builds the chess board with respective pieces in their respective locations 
+	 * @return A 2D Piece array object with all the chess pieces
+	 */
 	public static Piece[][] buildBoard() {
 		Piece[][] board = new Piece[8][8];
 		
@@ -65,6 +84,11 @@ public class Board {
 	}
 	
 	// Helper for printBoard
+	/**
+	 * Prints the name of the piece based on the player.
+	 * @param spot The current location of the piece  
+	 * @param piece The piece represented by a character
+	 */
 	private static void printName(Piece spot, char piece) {
 		boolean team = spot.getTeam();
 		if (team == true) { // white
@@ -75,6 +99,11 @@ public class Board {
 	}
 	
 	// Checkered Pattern for printBoard
+	/**
+	 * Prints out a checkered pattern on the board. Double hashtags represent a black spot on the board.
+	 * @param x The x coordinate on the board
+	 * @param y The y coordinate on the board
+	 */
 	private static void printChecker(int x, int y) {
 		if (x % 2 == 0) {
 			if (y % 2 == 0) {
@@ -94,6 +123,10 @@ public class Board {
 		
 	}
 	
+	/**
+	 * Prints the complete board with checkers and pieces in their respective location.
+	 * @param board A plain 2D piece array object
+	 */
 	public static void printBoard(Piece[][] board) {
 		// PRINT BOARD
 		int n = 8;
@@ -145,6 +178,13 @@ public class Board {
 		System.out.println();
 	}
 	
+	/**
+	 * Checks if the spot on the board is empty
+	 * @param board Uses the 2D piece array object
+	 * @param x The x coordinate of the piece
+	 * @param y The y coordinate of the piece
+	 * @return true if the coordinate on the board is empty
+	 */
 	public static boolean isEmpty(Piece[][] board, int x, int y) {
 		if (x > 7 || x < 0 || y > 7 || y < 0) { // out of range
 			return true;
@@ -159,6 +199,11 @@ public class Board {
 	
 	
 	// Translates human input to board language - string must be inputted correctly
+	/**
+	 * Translates the human input to a value that can be read by the board.
+	 * @param s The initial and final location of the piece as a string format
+	 * @return An int[] array object with the translated values
+	 */
 	public static int[] translate(String s) {
 		int[] arr = new int[4];
 		

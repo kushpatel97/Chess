@@ -3,13 +3,21 @@ package objects;
 import board.Board;
 
 public class Knight extends Piece {
+	/**
+	 * 2 Arg constructor for Knight Class
+	 * @param x Current X coordinate
+	 * @param y Current Y coordinate
+	 * @param team True is White, False is Black
+	 */
 	public Knight(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;
 		
 		this.team = team;
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		int oldx = this.x;

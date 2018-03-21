@@ -7,9 +7,23 @@ import java.io.InputStreamReader;
 import objects.*;
 import board.*;
 
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ *
+ */
 public class Chess {
+	/**
+	 * drawProposal
+	 */
 	static boolean drawProposal = false; // for draw proposals
 	
+	/**
+	 * Main loop in which chess runs. If either players kings are in a checkmate the game ends. If a player resigns the game also ends.
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main (String args[]) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -102,6 +116,12 @@ public class Chess {
 	}
 	
 	// checks if your move kills the King
+	/**
+	 * Checks if a move puts the king in check
+	 * @param board The board in which chess is being played on
+	 * @param turn True if it is the user's turn is white, False is black
+	 * @return True if a move can remove the king
+	 */
 	public static boolean kingDead(Piece[][] board, boolean turn) {
 		King king = null;
 		for (int i = 0; i <= 7; i++) {
@@ -118,6 +138,12 @@ public class Chess {
 		return false;
 	}
 	
+	/**
+	 * A check to see if there is no valid move when the king is not in check
+	 * @param board The board in which chess is being played on
+	 * @param turn True if it is the user's turn is white, False is black
+	 * @return True if the board is in a stalemate
+	 */
 	public static boolean staleMate(Piece[][] board, boolean turn) {
 		// basic explanation: 
 		King king = null;
@@ -161,7 +187,12 @@ public class Chess {
 		
 		return true;
 	}
-	
+	/**
+	 * A check to see if the king has any possible moves that might result in the king being captured
+	 * @param board The board in which chess is being played on
+	 * @param turn True if it is the user's turn is white, false is black
+	 * @return
+	 */
 	public static boolean checkMate(Piece[][] board, boolean turn) {
 		King king = null;
 		for (int i = 0; i <= 7; i++) {
@@ -209,7 +240,13 @@ public class Chess {
 
 		return false;
 	}
-
+	/**
+	 * A check that determines what the outcome will be dependent on the user's input
+	 * @param s The user input
+	 * @param turn The board in which chess is being played on
+	 * @param board True if it is the user's turn is white, false is black
+	 * @return True if an input is valid.
+	 */
 	public static boolean checkInput(String s, boolean turn, Piece[][] board) {
 		if (s.length() != 5 || s.charAt(2) != ' ') {
 			if (s.length() >= 6) {
@@ -279,7 +316,14 @@ public class Chess {
 		
 		return true;
 	}
-
+	
+	/**
+	 * A check to determine if a user's turn is correct
+	 * @param board The board in which chess is being played on
+	 * @param arr An int[] array that contains the moves of the user
+	 * @param turn True if it is the user's turn is white, false is black
+	 * @return True if the user's turn is correct
+	 */
 	public static boolean checkTurn(Piece[][] board, int[] arr, boolean turn) {
 		boolean team = board[arr[0]][arr[1]].getTeam();
 		
@@ -291,6 +335,11 @@ public class Chess {
 		return false;
 	}
 	
+	/**
+	 * Determines if it is the end of a game
+	 * @param team True is white, false is black 
+	 * @param draw True if outcome is a draw
+	 */
 	public static void endGame(boolean team, boolean draw) { // input is winner, draw is true if draw
 		if (draw) System.out.println("draw");
 		else if (team) System.out.println("White wins");

@@ -4,16 +4,30 @@ import board.Board;
 
 public class King extends Piece {
 	
+	/**
+	 * Whitecastle determines if the whitecastle is taken
+	 */
 	static boolean whitecastle = false;
+	/**
+	 * Blackcastle determines if the blackcastle is taken
+	 */
 	static boolean blackcastle = false;
 	
+	/**
+	 * 2 Arg Constructor for King
+	 * @param x Current X coordinate
+	 * @param y Current Y coordinate
+	 * @param team True is White, False is Black
+	 */
 	public King(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;
 		
 		this.team = team;
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		int oldx = this.x;
@@ -41,6 +55,9 @@ public class King extends Piece {
 		return false;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub

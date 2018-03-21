@@ -3,13 +3,28 @@ package objects;
 import board.Board;
 
 public class Rook extends Piece {
+	/**
+	 * 2 Arg Constructor for a Rook
+	 * @param x Current X coordinate
+	 * @param y Current Y coordinate
+	 * @param team True is White, False is Black
+	 */
 	public Rook(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;
 		
 		this.team = team;
 	}
-	
+	/**
+	 * A check to see if a move is possible
+	 * @param board The board where the piece is on
+	 * @param oldx The old x coordinate value
+	 * @param oldy The old x coordinate value
+	 * @param x The new x coordinate value
+	 * @param y The new y coordinate value
+	 * @param dir The direction in which the piece wants to move
+	 * @return True if move is possible
+	 */
 	private boolean lineCheck(Piece[][] board, int oldx, int oldy, int x, int y, int dir) {
 		// 5 (east) 6 (west) 7 (north) 8 (south)
 		if (dir == 5) {
@@ -47,6 +62,7 @@ public class Rook extends Piece {
 		return true;
 	}
 	
+
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		

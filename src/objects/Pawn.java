@@ -12,14 +12,26 @@ public class Pawn extends Piece {
 	public static char promotion = 'x'; // x is no promotion
 	static boolean enPassantKill = false; 
 	// static boolean enPassantDirection; // true = right, false = left
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param team
+	 */
 	public Pawn(int x, int y, boolean team) {
 		this.x = x;
 		this.y = y;
 		
 		this.team = team;
 	}
-	
+	/**
+	 * Executes promotion
+	 * @param c Character of the Piece
+	 * @param board The board where the piece is on
+	 * @param x Current X coordinate
+	 * @param y Current Y coordinate
+	 * @return True if promotion is possible
+	 */
 	// change a pawn to another type
 	public static boolean promote(char c, Piece[][] board, int x, int y) {
 		if (c == 'p') {
@@ -39,7 +51,11 @@ public class Pawn extends Piece {
 		board[x][y].firstmove = false;
 		return true;
 	}
-	
+	/**
+	 * Resets Enpassant move
+	 * @param board The board where	the piece is on
+	 * @param turn True is White's turn, False is Black's turn
+	 */
 	// resets all enpassants to false after each move
 	public static void resetEnPassant(Piece[][] board, boolean turn) {
 		for (int x = 0; x < 8; x++) {
@@ -50,7 +66,9 @@ public class Pawn extends Piece {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		// Black Pawn 
@@ -112,7 +130,9 @@ public class Pawn extends Piece {
 		
 		return false;
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub
