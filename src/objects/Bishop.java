@@ -1,6 +1,12 @@
 package objects;
 
 import board.Board;
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ *
+ */
 
 public class Bishop extends Piece {
 	/**

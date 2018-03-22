@@ -1,6 +1,11 @@
 package objects;
 
 import board.Board;
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ */
 
 public class Rook extends Piece {
 	/**
@@ -15,6 +20,7 @@ public class Rook extends Piece {
 		
 		this.team = team;
 	}
+	
 	/**
 	 * A check to see if a move is possible
 	 * @param board The board where the piece is on

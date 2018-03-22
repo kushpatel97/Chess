@@ -1,13 +1,13 @@
 package objects;
 
 import board.Board;
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ */
 
 public class Queen extends Piece {
-	// int x
-	// int y
-	// boolean firstmove = false;
-	// boolean team;
-	// boolean alive = true;
 	
 	/**
 	 * 2 Arg Queen Constructor
@@ -22,6 +22,7 @@ public class Queen extends Piece {
 		this.team = team;
 		firstmove = true;
 	}
+	
 	/**
 	 * A check to see if a move is possible
 	 * @param board The board where the piece is on

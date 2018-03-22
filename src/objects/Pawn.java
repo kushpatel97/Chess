@@ -1,12 +1,21 @@
 package objects;
 import board.*;
-
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ *
+ */
 public class Pawn extends Piece {
 	// int x
 	// int y
 	// boolean firstmove = false;
 	// boolean team;
 	// boolean alive = true;
+	
+	/**
+	 * Returns True if vulnerable to enpassant
+	 */
 	boolean enpassant; // marks vulnerability
 	
 	public static char promotion = 'x'; // x is no promotion
@@ -66,9 +75,8 @@ public class Pawn extends Piece {
 			}
 		}
 	}
-	/**
-	 * 
-	 */
+
+	
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		// Black Pawn 
@@ -130,9 +138,8 @@ public class Pawn extends Piece {
 		
 		return false;
 	}
-	/**
-	 * 
-	 */
+
+	
 	@Override
 	public boolean move(Piece[][] board, int x, int y) {
 		// TODO Auto-generated method stub

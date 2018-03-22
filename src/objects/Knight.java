@@ -2,6 +2,12 @@ package objects;
 
 import board.Board;
 
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ */
+
 public class Knight extends Piece {
 	/**
 	 * 2 Arg constructor for Knight Class
@@ -15,9 +21,7 @@ public class Knight extends Piece {
 		
 		this.team = team;
 	}
-	/**
-	 * 
-	 */
+
 	@Override
 	public boolean isPathClear(Piece[][] board, int x, int y) {
 		int oldx = this.x;

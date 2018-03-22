@@ -1,8 +1,11 @@
 package objects;
 import board.*;
-
+/**
+ * 
+ * @author Kush Patel
+ * @author Alexander Louie
+ */
 public abstract class Piece {
-        // Location
 		/**
 		 * The x coordinate of the Piece
 		 */
@@ -76,57 +79,56 @@ public abstract class Piece {
     	}
 
 
-    // Update Location + Delete Past Spot
+
     	/**
     	 * Updates location and deletes past spots
     	 * @param board The board that the piece is on
     	 * @param x X coordinate of the piece
     	 * @param y Y coordinate of the piece
     	 */
-    public void update(Piece[][] board, int x, int y) {
-    		board[x][y] = board[this.x][this.y];
-    		board[x][y].enpassant = board[this.x][this.y].enpassant;
-        board[this.x][this.y] = null;
-        board[x][y].x = x;
-        board[x][y].y = y;
-        this.firstmove = false;
-    }
+	    public void update(Piece[][] board, int x, int y) {
+	    		board[x][y] = board[this.x][this.y];
+	    		board[x][y].enpassant = board[this.x][this.y].enpassant;
+	        board[this.x][this.y] = null;
+	        board[x][y].x = x;
+	        board[x][y].y = y;
+	        this.firstmove = false;
+	    }
     
-    // Update Location + Delete Past Spot
-    /**
-     * Undo's move and updates board
-     * @param board The board that the piece is on
-     * @param x X coordinate of the piece
-  	 * @param y Y coordinate of the piece
-     * @param firstmove True if it the Pawn's first move
-     */
-    public void undo(Piece[][] board, int x, int y, boolean firstmove) {
-    		board[x][y] = board[this.x][this.y];
-    		board[x][y].firstmove = firstmove;
-    		board[x][y].enpassant = board[this.x][this.y].enpassant;
-        board[this.x][this.y] = null;
-        board[x][y].x = x;
-        board[x][y].y = y;
-    }
+   
+	    /**
+	     * Undo's move and updates board
+	     * @param board The board that the piece is on
+	     * @param x X coordinate of the piece
+	  	 * @param y Y coordinate of the piece
+	     * @param firstmove True if it the Pawn's first move
+	     */
+	    public void undo(Piece[][] board, int x, int y, boolean firstmove) {
+	    		board[x][y] = board[this.x][this.y];
+	    		board[x][y].firstmove = firstmove;
+	    		board[x][y].enpassant = board[this.x][this.y].enpassant;
+	        board[this.x][this.y] = null;
+	        board[x][y].x = x;
+	        board[x][y].y = y;
+	    }
     
-    // For Killing Other Pieces
-    /**
-     * Take out another piece
-     * @param board The board that the piece is on
-     * @param x end X coordinate of the piece
-  	 * @param y end Y coordinate of the piece
-  	 * @param thisx starting x coordinate of the piece
-  	 * @param thisy starting y coordinate of the piece
-     */
-    public void kill(Piece[][] board, int thisx, int thisy, int x, int y) {
-    		board[x][y] = board[thisx][thisy];
-		board[thisx][thisy] = null;
-		board[x][y].x = x;
-		board[x][y].y = y;
-		board[x][y].firstmove = false;
-    }
     
-    // Move Piece
+	    /**
+	     * Take out another piece
+	     * @param board The board that the piece is on
+	     * @param x end X coordinate of the piece
+	  	 * @param y end Y coordinate of the piece
+	  	 * @param thisx starting x coordinate of the piece
+	  	 * @param thisy starting y coordinate of the piece
+	     */
+	    public void kill(Piece[][] board, int thisx, int thisy, int x, int y) {
+	    		board[x][y] = board[thisx][thisy];
+			board[thisx][thisy] = null;
+			board[x][y].x = x;
+			board[x][y].y = y;
+			board[x][y].firstmove = false;
+	    }
+    
     /**
      * Only possible moves of the type of piece
      * @param board The board that the piece is on
@@ -157,6 +159,7 @@ public abstract class Piece {
 			return false;
 		}
 	}
+    
     /**
      * Check to see if a king is in check
      * @param board The board that the piece is on
@@ -281,7 +284,6 @@ public abstract class Piece {
     		return false;
     }
     
-   // Helper for move method
     /**
      * A check to determine if a path is clear
      * @param board The board that the piece is on
