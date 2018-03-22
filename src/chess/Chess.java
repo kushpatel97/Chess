@@ -94,8 +94,22 @@ public class Chess {
 						System.out.println("Illegal move, try again");
 						System.out.println();
 						continue;
-					} 
+					}
+					// ---------------------------
+					King otherking = null;
+					for (int i = 0; i <= 7; i++) {
+						for (int j = 0; j<= 7; j++) {
+							if (!Board.isEmpty(board, i, j) && board[i][j].getTeam() != turn && board[i][j] instanceof King) {
+								otherking = (King) board[i][j];
+							}
+						}
+					}
 					Board.printBoard(board);
+					if (otherking != null) {
+						if (Piece.isChecked(board, otherking.getx(), otherking.gety(), !turn)) {
+							System.out.println("Check");
+						}
+					}
 					turn = !turn;
 				} else {
 					//System.out.println("4");
@@ -185,6 +199,7 @@ public class Chess {
 			}
 		}
 		
+		System.out.println("Stalemate");
 		return true;
 	}
 	/**
@@ -235,6 +250,7 @@ public class Chess {
 				}
 			}	
 
+			System.out.println("Checkmate");
 			return true;
 		} 
 
